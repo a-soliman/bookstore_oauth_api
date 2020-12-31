@@ -1,6 +1,7 @@
 package db
 
 import (
+	"github.com/a-soliman/bookstore_oauth_api/src/clients/cassandra"
 	"github.com/a-soliman/bookstore_oauth_api/src/domain/access_token"
 	"github.com/a-soliman/bookstore_oauth_api/src/utils/errors"
 )
@@ -19,5 +20,10 @@ func New() Repository {
 }
 
 func (r *repository) GetByID(accessTokenID string) (*access_token.AccessToken, *errors.RestErr) {
+	session, err := cassandra.GetSession()
+	if err != nil {
+		panic(err)
+	}
+	defer session.Close()
 	return nil, errors.NewInternalServerError("database connection not implemented")
 }

@@ -1,9 +1,11 @@
 package access_token
 
 import (
+	"fmt"
 	"strings"
 	"time"
 
+	"github.com/a-soliman/bookstore_oauth_api/src/utils/crypto_utils"
 	"github.com/a-soliman/bookstore_oauth_api/src/utils/errors"
 )
 
@@ -20,8 +22,9 @@ type AccessToken struct {
 }
 
 // GetNewAccessToken returns a new access token
-func GetNewAccessToken() AccessToken {
+func GetNewAccessToken(userID int64) AccessToken {
 	return AccessToken{
+		UserID:  userID,
 		Expires: time.Now().UTC().Add(expirationTime * time.Hour).Unix(),
 	}
 }
@@ -31,6 +34,11 @@ func (at *AccessToken) IsExpired() bool {
 	now := time.Now().UTC()
 	expirationTime := time.Unix(at.Expires, 0)
 	return now.After(expirationTime)
+}
+
+// Generate generates the access token
+func (at *AccessToken) Generate() {
+	at.AccessToken = crypto_utils.GetMd5(fmt.Sprintf("at-%d-%d-ran", at.UserID, at.Expires))
 }
 
 // Validate validates the access token

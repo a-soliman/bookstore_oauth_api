@@ -1,7 +1,7 @@
 package access_token
 
 import (
-	"github.com/a-soliman/bookstore_oauth_api/utils/errors"
+	"github.com/a-soliman/bookstore_utils-go/rest_errors"
 )
 
 const (
@@ -24,7 +24,7 @@ type AccessTokenRequest struct {
 }
 
 // Validate validates the access token
-func (atr *AccessTokenRequest) Validate() *errors.RestErr {
+func (atr *AccessTokenRequest) Validate() *rest_errors.RestErr {
 	switch atr.GrantType {
 	case grantTypePassword:
 		break
@@ -33,7 +33,7 @@ func (atr *AccessTokenRequest) Validate() *errors.RestErr {
 		break
 
 	default:
-		return errors.NewBadRequestError("invalid grant_type paramater")
+		return rest_errors.NewBadRequestError("invalid grant_type paramater")
 	}
 
 	// Todo: validate parameters for each grant_type

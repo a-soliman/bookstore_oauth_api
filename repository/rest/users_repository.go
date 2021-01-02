@@ -8,7 +8,7 @@ import (
 	"github.com/federicoleon/golang-restclient/rest"
 
 	"github.com/a-soliman/bookstore_oauth_api/domain/users"
-	"github.com/a-soliman/bookstore_oauth_api/utils/errors"
+	"github.com/a-soliman/bookstore_utils-go/rest_errors"
 )
 
 var (
@@ -20,7 +20,7 @@ var (
 
 // UsersRepository interface
 type UsersRepository interface {
-	LoginUser(string, string) (*users.User, *errors.RestErr)
+	LoginUser(string, string) (*users.User, *rest_errors.RestErr)
 }
 
 type usersRepository struct{}
@@ -30,7 +30,7 @@ func New() UsersRepository {
 	return &usersRepository{}
 }
 
-func (r *usersRepository) LoginUser(email, password string) (*users.User, *errors.RestErr) {
+func (r *usersRepository) LoginUser(email, password string) (*users.User, *rest_errors.RestErr) {
 	request := users.UserLoginRequest{
 		Email:    email,
 		Password: password,
@@ -38,19 +38,19 @@ func (r *usersRepository) LoginUser(email, password string) (*users.User, *error
 	response := usersRestClient.Post("/users/login", request)
 	if response == nil || response.Response == nil {
 		fmt.Println(response)
-		return nil, errors.NewInternalServerError("invalid restclient response while trying to login user")
+		return nil, rest_errors.NewInternalServerError("invalid restclient response while trying to login user", nil)
 	}
 	if response.StatusCode > 299 {
-		var restErr errors.RestErr
+		var restErr rest_errors.RestErr
 		if err := json.Unmarshal(response.Bytes(), &restErr); err != nil {
 			fmt.Println("here")
-			return nil, errors.NewInternalServerError("invalid error interface while trying to login user")
+			return nil, rest_errors.NewInternalServerError("invalid error interface while trying to login user", err)
 		}
 		return nil, &restErr
 	}
 	var user users.User
 	if err := json.Unmarshal(response.Bytes(), &user); err != nil {
-		return nil, errors.NewInternalServerError("error while trying to unmarshal users response to login user")
+		return nil, rest_errors.NewInternalServerError("error while trying to unmarshal users response to login user", err)
 	}
 	return &user, nil
 }

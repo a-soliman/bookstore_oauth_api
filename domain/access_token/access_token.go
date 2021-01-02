@@ -6,7 +6,7 @@ import (
 	"time"
 
 	"github.com/a-soliman/bookstore_oauth_api/utils/crypto_utils"
-	"github.com/a-soliman/bookstore_oauth_api/utils/errors"
+	"github.com/a-soliman/bookstore_utils-go/rest_errors"
 )
 
 const (
@@ -42,19 +42,19 @@ func (at *AccessToken) Generate() {
 }
 
 // Validate validates the access token
-func (at *AccessToken) Validate() *errors.RestErr {
+func (at *AccessToken) Validate() *rest_errors.RestErr {
 	at.AccessToken = strings.TrimSpace(at.AccessToken)
 	if at.AccessToken == "" {
-		return errors.NewBadRequestError("invalid access token id")
+		return rest_errors.NewBadRequestError("invalid access token id")
 	}
 	if at.UserID <= 0 {
-		return errors.NewBadRequestError("invalid user id")
+		return rest_errors.NewBadRequestError("invalid user id")
 	}
 	if at.ClientID <= 0 {
-		return errors.NewBadRequestError("invalid client id")
+		return rest_errors.NewBadRequestError("invalid client id")
 	}
 	if at.Expires <= 0 {
-		return errors.NewBadRequestError("invalid expiration time")
+		return rest_errors.NewBadRequestError("invalid expiration time")
 	}
 	return nil
 }

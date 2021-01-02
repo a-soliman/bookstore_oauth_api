@@ -5,7 +5,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/a-soliman/bookstore_oauth_api/utils/crypto_utils"
+	"github.com/a-soliman/bookstore_utils-go/crypto_utils"
 	"github.com/a-soliman/bookstore_utils-go/rest_errors"
 )
 

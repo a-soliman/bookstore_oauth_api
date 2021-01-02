@@ -3,10 +3,10 @@ package access_token_service
 import (
 	"strings"
 
-	"github.com/a-soliman/bookstore_oauth_api/src/domain/access_token"
-	"github.com/a-soliman/bookstore_oauth_api/src/repository/db"
-	"github.com/a-soliman/bookstore_oauth_api/src/repository/rest"
-	"github.com/a-soliman/bookstore_oauth_api/src/utils/errors"
+	"github.com/a-soliman/bookstore_oauth_api/domain/access_token"
+	"github.com/a-soliman/bookstore_oauth_api/repository/db"
+	"github.com/a-soliman/bookstore_oauth_api/repository/rest"
+	"github.com/a-soliman/bookstore_oauth_api/utils/errors"
 )
 
 // Service the service interface

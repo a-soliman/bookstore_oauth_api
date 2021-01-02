@@ -3,9 +3,9 @@ package http
 import (
 	"net/http"
 
-	atDomain "github.com/a-soliman/bookstore_oauth_api/src/domain/access_token"
-	"github.com/a-soliman/bookstore_oauth_api/src/services/access_token_service"
-	"github.com/a-soliman/bookstore_oauth_api/src/utils/errors"
+	atDomain "github.com/a-soliman/bookstore_oauth_api/domain/access_token"
+	"github.com/a-soliman/bookstore_oauth_api/services/access_token_service"
+	"github.com/a-soliman/bookstore_oauth_api/utils/errors"
 	"github.com/gin-gonic/gin"
 )
 

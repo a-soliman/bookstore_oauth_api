@@ -5,8 +5,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/a-soliman/bookstore_oauth_api/src/utils/crypto_utils"
-	"github.com/a-soliman/bookstore_oauth_api/src/utils/errors"
+	"github.com/a-soliman/bookstore_oauth_api/utils/crypto_utils"
+	"github.com/a-soliman/bookstore_oauth_api/utils/errors"
 )
 
 const (

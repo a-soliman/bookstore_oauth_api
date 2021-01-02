@@ -7,8 +7,8 @@ import (
 
 	"github.com/federicoleon/golang-restclient/rest"
 
-	"github.com/a-soliman/bookstore_oauth_api/src/domain/users"
-	"github.com/a-soliman/bookstore_oauth_api/src/utils/errors"
+	"github.com/a-soliman/bookstore_oauth_api/domain/users"
+	"github.com/a-soliman/bookstore_oauth_api/utils/errors"
 )
 
 var (

@@ -1,10 +1,10 @@
 package app
 
 import (
-	"github.com/a-soliman/bookstore_oauth_api/src/http"
-	"github.com/a-soliman/bookstore_oauth_api/src/repository/db"
-	"github.com/a-soliman/bookstore_oauth_api/src/repository/rest"
-	"github.com/a-soliman/bookstore_oauth_api/src/services/access_token_service"
+	"github.com/a-soliman/bookstore_oauth_api/http"
+	"github.com/a-soliman/bookstore_oauth_api/repository/db"
+	"github.com/a-soliman/bookstore_oauth_api/repository/rest"
+	"github.com/a-soliman/bookstore_oauth_api/services/access_token_service"
 	"github.com/gin-gonic/gin"
 )
 

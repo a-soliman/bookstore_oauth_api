@@ -1,9 +1,9 @@
 package db
 
 import (
-	"github.com/a-soliman/bookstore_oauth_api/src/clients/cassandra"
-	"github.com/a-soliman/bookstore_oauth_api/src/domain/access_token"
-	"github.com/a-soliman/bookstore_oauth_api/src/utils/errors"
+	"github.com/a-soliman/bookstore_oauth_api/clients/cassandra"
+	"github.com/a-soliman/bookstore_oauth_api/domain/access_token"
+	"github.com/a-soliman/bookstore_oauth_api/utils/errors"
 	"github.com/gocql/gocql"
 )
 

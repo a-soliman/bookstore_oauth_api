@@ -1,7 +1,7 @@
 package access_token
 
 import (
-	"github.com/a-soliman/bookstore_oauth_api/src/utils/errors"
+	"github.com/a-soliman/bookstore_oauth_api/utils/errors"
 )
 
 const (

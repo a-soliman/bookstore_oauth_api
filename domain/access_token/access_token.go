@@ -42,7 +42,7 @@ func (at *AccessToken) Generate() {
 }
 
 // Validate validates the access token
-func (at *AccessToken) Validate() *rest_errors.RestErr {
+func (at *AccessToken) Validate() rest_errors.RestErr {
 	at.AccessToken = strings.TrimSpace(at.AccessToken)
 	if at.AccessToken == "" {
 		return rest_errors.NewBadRequestError("invalid access token id")

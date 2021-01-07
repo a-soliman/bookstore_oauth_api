@@ -24,7 +24,7 @@ type AccessTokenRequest struct {
 }
 
 // Validate validates the access token
-func (atr *AccessTokenRequest) Validate() *rest_errors.RestErr {
+func (atr *AccessTokenRequest) Validate() rest_errors.RestErr {
 	switch atr.GrantType {
 	case grantTypePassword:
 		break

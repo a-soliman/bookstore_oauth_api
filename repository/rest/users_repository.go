@@ -14,7 +14,7 @@ import (
 var (
 	usersRestClient = rest.RequestBuilder{
 		BaseURL: "http://localhost:8082",
-		Timeout: 100 * time.Millisecond,
+		Timeout: 2 * time.Second,
 	}
 )
 
@@ -37,13 +37,12 @@ func (r *usersRepository) LoginUser(email, password string) (*users.User, rest_e
 	}
 	response := usersRestClient.Post("/users/login", request)
 	if response == nil || response.Response == nil {
-		fmt.Println(response)
 		return nil, rest_errors.NewInternalServerError("invalid restclient response while trying to login user", nil)
 	}
 	if response.StatusCode > 299 {
-		var restErr rest_errors.RestErr
-		if err := json.Unmarshal(response.Bytes(), &restErr); err != nil {
-			fmt.Println("here")
+		restErr, err := rest_errors.NewRestErrorFromBytes(response.Bytes())
+		if err != nil {
+			fmt.Println(err)
 			return nil, rest_errors.NewInternalServerError("invalid error interface while trying to login user", err)
 		}
 		return nil, restErr

@@ -3,17 +3,25 @@ package rest
 import (
 	"encoding/json"
 	"fmt"
+	"log"
+	"os"
 	"time"
 
 	"github.com/federicoleon/golang-restclient/rest"
+	"github.com/joho/godotenv"
 
 	"github.com/a-soliman/bookstore_oauth_api/domain/users"
 	"github.com/a-soliman/bookstore_utils-go/rest_errors"
 )
 
+const (
+	usersMicroserviceURLVar = "USERS_MICROSERVICE_URL"
+)
+
 var (
-	usersRestClient = rest.RequestBuilder{
-		BaseURL: "http://localhost:8082",
+	usersMicroserviceURL = goDotEnvVariable(usersMicroserviceURLVar)
+	usersRestClient      = rest.RequestBuilder{
+		BaseURL: usersMicroserviceURL,
 		Timeout: 2 * time.Second,
 	}
 )
@@ -52,4 +60,17 @@ func (r *usersRepository) LoginUser(email, password string) (*users.User, rest_e
 		return nil, rest_errors.NewInternalServerError("error while trying to unmarshal users response to login user", err)
 	}
 	return &user, nil
+}
+
+// TODO: this is duplicated and must go to utils instead.
+func goDotEnvVariable(key string) string {
+
+	// load .env file
+	err := godotenv.Load(".env")
+
+	if err != nil {
+		log.Fatalf("Error loading .env file")
+	}
+
+	return os.Getenv(key)
 }
